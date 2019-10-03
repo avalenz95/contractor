@@ -1,5 +1,18 @@
+
 .navbar-brand {
     padding: 0 15px;
     height: 90px;
     line-height: 160px;
   }
+
+/* increase size of search bar */
+.form-control {
+    height: 50px;
+}
+
+/* Center Search bar contents and increase fontsize */
+input[type="search"] {
+    font-size: 40px;
+    color: black;
+    text-align: center;
+}
