@@ -10,5 +10,6 @@ def index():
 
 @app.route('/cart')
 def cart():
-    """Show Cart with cart contents"""
+    """Show Cart with cart contents""" 
+    return render_template('cart.html')
     pass
