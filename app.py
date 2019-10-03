@@ -4,15 +4,19 @@ import json
 app = Flask(__name__)
 
 #Show initial search page with attributions and big search bar
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     """Show Search Bar and Attributions"""
-    #query = request.form.get('search')
+
+    if request.method == 'POST':
+        query = request.form.get('search')
+    else:
+        query = 'test'
 
     query_string = {
         'api_key': 'c19ff401506998a56c82406befe55455',
         'language': 'en-US',
-        'query': 'test',
+        'query': query,
         'include_adult': 'False'
     }
     r = requests.get("https://api.themoviedb.org/3/search/multi?", query_string)

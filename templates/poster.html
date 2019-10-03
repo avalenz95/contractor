@@ -1,0 +1,14 @@
+<!-- poster.html -->
+<div class="col-md-3">
+    <a href="https://image.tmdb.org/t/p/w500{{ movies.poster_path }}"></a>
+
+    <!--Check Json field for title or name-->
+    {% if movies.has("title") %}
+        <h1>{{movies.title}}</h1>
+    {% elif movies.has("original_name") %}
+        <h1>{{movies.original_name}}</h1>
+    {% else %}
+        <h1>Title not found.</h1>
+    {% endif %}
+    <a href="{{ gif.url }}"></a>
+</div>
