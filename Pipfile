@@ -10,6 +10,7 @@ pylint = "*"
 flask = "*"
 requests = "*"
 jinja2 = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.7"
