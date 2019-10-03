@@ -1,8 +1,13 @@
+import os
+
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, render_template, request
 import requests
 import json
 app = Flask(__name__)
-
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 #Show initial search page with attributions and big search bar
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -14,7 +19,7 @@ def index():
         query = 'test'
 
     query_string = {
-        'api_key': 'c19ff401506998a56c82406befe55455',
+        'api_key': TMDB_API_KEY,
         'language': 'en-US',
         'query': query,
         'include_adult': 'False'
