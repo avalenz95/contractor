@@ -27,7 +27,7 @@ def index():
     r = requests.get("https://api.themoviedb.org/3/search/multi?", query_string)
     movies = json.loads(r.content)["results"]
 
-    #Thanks to Mr. Ben Lafferty for 
+    #Thanks to Mr. Ben Lafferty and Zurich Okoren for helping me understand lambda and filter better
     filtered_list = list(filter(lambda x: (x.get("title") or x.get("original_title" or x.get("original_name"))) and x.get("poster_path"), movies))
 
     #Check if movie has a title or a name remove it if it does not have either
