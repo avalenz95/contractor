@@ -1,14 +1,14 @@
 <!-- poster.html -->
-<div class="col-md-3">
-
-     <!--Check JSON field for title or name -->
-    {% if movie.get("title", False)%}
-        <h1> {{ movie["title"] }} </h1>
-    {% elif movie.get("original_name", False) %}
-        <h1> {{ movie["original_name"] }} </h1>
-    {% elif movie.get("original_title", False) %}
-        <h1> {{ movie["original_title"] }} </h1>
-    {% endif %}
-
+<div class="col-lg-3 text-center">
+   <!--Check JSON field fo  r title or name -->
+  <div>
+        {% if movie.get("title", False)%}
+            <h3> {{ movie["title"] }} </h3>
+        {% elif movie.get("original_name", False) %}
+            <h3> {{ movie["original_name"] }} </h3>
+        {% elif movie.get("original_title", False) %}
+            <h3> {{ movie["original_title"] }} </h3>
+        {% endif %}
+    </div>
     <img src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="">
 </div>
