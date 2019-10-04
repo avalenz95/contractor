@@ -23,3 +23,59 @@ input[type="search"] {
     font-size: 20px;
     border-radius: 10px;
 }
+
+/*Thanks to https://codepen.io/themechills/pen/dMamgG and https://www.bootply.com/XfBS0alpDs
+Refactored code to fit my needs.*/
+.img-in {
+    -webkit-animation: fadein 3.5s, fadeInUp 4.5s; /* Safari and Chrome */
+    -moz-animation: fadein 3.5s, fadeInUp 4.5s; /* Firefox */
+    -ms-animation: fadein 3.5s,fadeInUp 4.5s;/* Internet Explorer */
+    -o-animation: fadein 3.5s, fadeInUp 4.5s;/* Opera */
+    animation: fadein 3.5s, fadeInUp 4.5s;
+}
+    
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​
+
+
+/* Animation */
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+    }
+}
