@@ -16,3 +16,10 @@ input[type="search"] {
     color: black;
     text-align: center;
 }
+
+.btn {
+    margin: 5px;
+    padding: 5px 15px;
+    font-size: 20px;
+    border-radius: 10px;
+}
