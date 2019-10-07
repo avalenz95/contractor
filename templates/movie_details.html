@@ -3,21 +3,34 @@
 <!-- poster.html -->
 <div class="container-fluid">
     <div class="row">
-            <!-- Poster -->
-            <img id="poster" class="img-in" src="https://image.tmdb.org/t/p/w400{{ movie['poster_path'] }}" alt="">
-            <!-- Movie Title -->
-            <div class="col">
-                <h1>{% include '/partials/movie_title.html'%}</h1>
-            <hr/>
-            <!-- Movie Description -->
+        <!-- Poster -->
+        <img id="poster" class="img-in" src="https://image.tmdb.org/t/p/w400{{ movie['poster_path'] }}" alt="">
+        <!-- Movie Title -->
+        <div class="col">
+            <h1>{% include '/partials/movie_title.html'%}</h1>
+        <hr/>
+
+        <!-- Movie Description -->
+        <br>
+
+        <h3 class="text-lg-left"> {{movie['overview']}} </h3>
+
+        <br>
+
+        <div>
+
+        <!-- Add movie to wishlist -->
+        <form action='/wishlist/add/{{movie._id}}' method='POST'>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Add to Wishlist</button>
+        </form>
+
             <br>
-            <h3 class="text-lg-left"> {{movie['overview']}} </h3>
-            <br>
-            <div>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Add to Wishlist</button>
-                <br>
-                <button type="button" class="btn btn-secondary btn-lg btn-block">Add to Cart</button>
-            </div>
+        <!-- Add movie to cart-->
+        <form action='/cart/add/{{movie._id}}' method='POST'>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Add to Cart</button>
+        </form>
+        
+        </div>
         </div>
     </div>
 </div>

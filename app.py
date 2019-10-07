@@ -62,12 +62,32 @@ def movie_details(movie_id):
     movie = current_index.find_one({'_id': ObjectId(movie_id)})
     return render_template('movie_details.html', movie=movie)
 
-@app.route('/cart/add/<movie_id>')
-def add_to_cart():
-    return "placeholder"
-    
+#Add movie to either wishlist or cart with a movie id
+@app.route('/<location>/add/<movie_id>')
+def add_to(location, movie_id):
+    #Find movie from index
+    movie = current_index.find_one({'_id': ObjectId(movie_id)})
+
+    movies_list = []
+    #add item to cart
+    if location == 'cart':
+        cart_list.insert_one(movie)
+        movies_list = list(cart_list.find())
+    #add item to wishlist
+    elif location == 'wishlist':
+        wish_list.insert_one(movie)
+        movies_list = list(wish_list.find())
+
+    #redirect to cart or wishlist after adding a movie with collection list
+    return redirect(url_for(f'{location}_index', movies=movies_list))
+
 #Show shopping cart
 @app.route('/cart')
-def cart_index():
+def cart_index(movies):
     """Show Cart with all cart contents""" 
-    return render_template('cart.html')
+    return render_template('cart.html', movies=movies)
+
+@app.route('/wishlist')
+def wishlist_index(movies):
+    """Show Wishlist with all contents""" 
+    return render_template('wishlist.html', movies=movies)
