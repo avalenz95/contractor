@@ -10,6 +10,12 @@
     height: 50px;
 }
 
+#poster{
+    margin-right: 1%;
+    margin-left: 1%;
+    
+}
+
 /* Center Search bar contents and increase fontsize */
 input[type="search"] {
     font-size: 40px;

@@ -1,27 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <!-- poster.html -->
-<div class="col-lg-3 text-center">
-         <!--Check JSON field fo  r title or name -->
-        <div>
-              {% if movie.get("title", False)%}
-                  <h3> {{ movie["title"] }} </h3>
-              {% elif movie.get("original_name", False) %}
-                  <h3> {{ movie["original_name"] }} </h3>
-              {% elif movie.get("original_title", False) %}
-                  <h3> {{ movie["original_title"] }} </h3>
-              {% endif %}
-          </div>
-          <img  class="img-fluid img-in" src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="">
-          <div>
-      
-          <form action='/' method='POST'>
-              <button type="submit" name="details" class="btn btn-primary btn-lg" value='{{ movie["index"] }}'  >View Details</button>
-              <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
-          </form>
-          </div>
-      </div>
+<div class="container-fluid">
+    <div class="row">
+            <img id="poster" class="img-in" src="https://image.tmdb.org/t/p/w400{{ movie['poster_path'] }}" alt="">
+        <div class="col">
+                <h1>
+                {% if movie.get("title", False)%}{{ movie["title"] }}
+                {% elif movie.get("original_name", False) %}{{ movie["original_name"] }}
+                {% elif movie.get("original_title", False) %}{{ movie["original_title"] }}
+                {% endif %}
+                </h1>
+            <br>
+            <h3 class="text-lg-left"> {{movie['overview']}} </h3>
+        </div>
+    </div>
+</div>
       
 
 {% endblock %}
