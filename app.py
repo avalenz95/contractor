@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 load_dotenv()
 
@@ -57,16 +58,15 @@ def index():
 
 
     #Display all movies in current_index
-    movies = [movie for movie in current_index.find()]
-
-    return render_template('index.html', movies = movies)
+    return render_template('index.html', movies = list(current_index.find()))
 
 #Route a single movie with description and images
 @app.route('/movie/<movie_id>', methods=['POST'])
 def movie_details(movie_id):
     """Show a single movies details"""
-    
-    return render_template('movie_details.html')
+    #Find movie in index database
+    movie = current_index.find_one({'_id': ObjectId(movie_id)})
+    return render_template('movie_details.html', movie=movie)
 #Show shopping cart
 @app.route('/cart')
 def cart_index():
