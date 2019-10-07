@@ -1,12 +1,6 @@
-<!-- movie_title.html 
-    adds the movie title where requested
--->
-<div>
-    {% if movie.get("title", False)%}
-        <h3> {{ movie["title"] }} </h3>
-    {% elif movie.get("original_name", False) %}
-        <h3> {{ movie["original_name"] }} </h3>
-    {% elif movie.get("original_title", False) %}
-        <h3> {{ movie["original_title"] }} </h3>
-    {% endif %}
-</div>
+<!-- movie_title.html
+Partial for the movie title-->
+{% if movie.get("title", False)%}{{ movie["title"] }}
+{% elif movie.get("original_name", False) %}{{ movie["original_name"] }}
+{% elif movie.get("original_title", False) %}{{ movie["original_title"] }}
+{% endif %}

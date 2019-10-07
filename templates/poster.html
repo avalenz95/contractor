@@ -2,13 +2,7 @@
 <div class="col-lg-3 text-center">
    <!--Check JSON field fo  r title or name -->
   <div>
-        {% if movie.get("title", False)%}
-            <h3> {{ movie["title"] }} </h3>
-        {% elif movie.get("original_name", False) %}
-            <h3> {{ movie["original_name"] }} </h3>
-        {% elif movie.get("original_title", False) %}
-            <h3> {{ movie["original_title"] }} </h3>
-        {% endif %}
+        <h3>{% include '/partials/movie_title.html'%}</h3>
     </div>
     <img  class="img-fluid img-in" src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="">
     <div>
