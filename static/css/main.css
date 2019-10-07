@@ -16,6 +16,15 @@
     
 }
 
+.nav-item{
+    font-size: 30px;
+}
+
+hr { 
+    background-color: whitesmoke;
+    height: 2px;
+    border: 0; }
+
 /* Center Search bar contents and increase fontsize */
 input[type="search"] {
     font-size: 40px;

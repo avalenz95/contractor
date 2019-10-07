@@ -27,12 +27,8 @@ def index():
     """Show Search Bar and Attributions"""
 
     #Page has just refreshed
-    if request.method == 'GET':
-        query = 'test'
-    else:
-        query = request.form.get('search')
+    query = request.form.get('search')
     
-    print(f"CURRENT COUNT 1 : {current_index.count()}")
 
     query_string = {
         'api_key': TMDB_API_KEY,
@@ -41,18 +37,18 @@ def index():
         'include_adult': 'False'
     }
 
-    r = requests.get("https://api.themoviedb.org/3/search/multi?", query_string)
-    movies = json.loads(r.content)["results"]
+    #if there is a query 
+    if query is not None:
+        r = requests.get("https://api.themoviedb.org/3/search/multi?", query_string)
+        movies = json.loads(r.content)["results"]
 
-    current_index.drop()
+        current_index.drop()
 
-    #Thanks to Mr. Ben Lafferty and Zurich Okoren for helping me understand lambda and filter better
-    filtered_list = list(filter(lambda x: (x.get("title") or x.get("original_title" or x.get("original_name"))) and x.get("poster_path"), movies))
+        #Thanks to Mr. Ben Lafferty and Zurich Okoren for helping me understand lambda and filter better
+        filtered_list = list(filter(lambda x: (x.get("title") or x.get("original_title" or x.get("original_name"))) and x.get("poster_path"), movies))
 
-    #Add current index of movies to a collection
-    current_index.insert_many(filtered_list)
-
-    print(f"CURRENT COUNT 2 : {current_index.count()}")
+        #Add current index of movies to a collection
+        current_index.insert_many(filtered_list)
 
 
     #Display all movies in current_index
@@ -65,6 +61,11 @@ def movie_details(movie_id):
     #Find movie in index database
     movie = current_index.find_one({'_id': ObjectId(movie_id)})
     return render_template('movie_details.html', movie=movie)
+
+@app.route('/cart/add/<movie_id>')
+def add_to_cart():
+    return "placeholder"
+    
 #Show shopping cart
 @app.route('/cart')
 def cart_index():
