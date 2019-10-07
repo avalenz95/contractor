@@ -1,1 +1,22 @@
+{% extends 'base.html' %}
 
+{% block content %}
+<h1> Cart </h1>
+{% for movie in cart %}
+    <hr/>
+    <div class="row">
+            <!-- Poster -->
+            <img id="poster" class="img-in" src="https://image.tmdb.org/t/p/w400{{ movie['poster_path'] }}" alt="">
+            
+            <div class="col">
+                <!-- Movie Title -->
+                <h2>{% include '/partials/movie_title.html'%}</h2>
+                <!-- Movie Description -->
+                <br>
+                <h4 class="text-lg-left"> {{movie['overview']}} </h4>
+                <br>
+                <button type="submit" class="btn btn-secondary btn-lg btn-danger">Add to Cart</button>
+            </div>
+    </div>
+{% endfor %}
+{% endblock %}

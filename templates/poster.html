@@ -8,8 +8,12 @@
     <div>
     <!-- Pass in object id to url-->
     <form action='/movie/{{movie._id}}' method='POST'>
-        <button href='/movie/{{movie._id}}' class="btn btn-primary name="details" btn-lgr">View Details</a>
-        <button href='/my_action2' name="details" class="btn btn-primary btn-lg">Add to Cart</a>
+        <button type ='submit' class="btn btn-primary btn-md">View Details</button>
+    </form>
+    <form action='/cart/add/{{movie._id}}'>
+        <button type='submit' class="btn btn-primary btn-md">Add to Cart</button>
     </form>
     </div>
 </div>
+
+

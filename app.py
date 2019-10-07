@@ -17,6 +17,8 @@ cart_list = db.cart_list
 wish_list = db.wish_list
 current_index = db.current_index
 current_index.drop()
+#wish_list.drop()
+#cart_list.drop()
 
 app = Flask(__name__)
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
@@ -68,26 +70,24 @@ def add_to(location, movie_id):
     #Find movie from index
     movie = current_index.find_one({'_id': ObjectId(movie_id)})
 
-    movies_list = []
     #add item to cart
     if location == 'cart':
         cart_list.insert_one(movie)
-        movies_list = list(cart_list.find())
     #add item to wishlist
     elif location == 'wishlist':
         wish_list.insert_one(movie)
-        movies_list = list(wish_list.find())
 
     #redirect to cart or wishlist after adding a movie with collection list
-    return redirect(url_for(f'{location}_index', movies=movies_list))
+    return redirect(url_for(f'{location}_index'))
 
-#Show shopping cart
+#Show shopping cart                                     
 @app.route('/cart')
-def cart_index(movies):
+def cart_index():
     """Show Cart with all cart contents""" 
-    return render_template('cart.html', movies=movies)
+  
+    return render_template('cart.html', cart=list(cart_list.find()))
 
-@app.route('/wishlist')
-def wishlist_index(movies):
-    """Show Wishlist with all contents""" 
-    return render_template('wishlist.html', movies=movies)
+#@app.route('/wishlist')
+#def wishlist_index(movies):
+#    """Show Wishlist with all contents""" 
+ #   return render_template('wishlist.html', movies=movies)
