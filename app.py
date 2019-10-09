@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument, errors
 from bson.objectid import ObjectId
 
 #Client
@@ -14,8 +14,8 @@ cart_list = db.cart_list
 wish_list = db.wish_list
 current_index = db.current_index
 current_index.drop()
-#wish_list.drop()
-#cart_list.drop()
+wish_list.drop()
+cart_list.drop()
 
 app = Flask(__name__)
 TMDB_API_KEY = 'c19ff401506998a56c82406befe55455'
@@ -64,15 +64,21 @@ def movie_details(movie_id):
 #Add movie to either wishlist or cart with a movie id
 @app.route('/<location>/add/<movie_id>')
 def add_to(location, movie_id):
-    #Find movie from index
-    movie = current_index.find_one({'_id': ObjectId(movie_id)})
+    #Find movie from index and add set the quantity added to cart == 1
+    try:
 
-    #add item to cart
-    if location == 'cart':
-        cart_list.insert_one(movie)
-    #add item to wishlist
-    elif location == 'wishlist':
-        wish_list.insert_one(movie)
+        movie = current_index.find_one_and_update({'_id': ObjectId(movie_id)}, {'$set': {'quantity': int(1)}}, return_document=ReturnDocument.AFTER)
+        #add item to cart
+        if location == 'cart':
+            cart_list.insert_one(movie)
+        #add item to wishlist
+        elif location == 'wishlist':
+            wish_list.insert_one(movie)
+
+    #Movie is already in collection update quantity instead
+    except errors.DuplicateKeyError:
+        if location == 'cart':
+            cart_list.find_one_and_update({'_id': ObjectId(movie_id)}, {'$inc': {'quantity': int(1)}})
 
     #redirect to cart or wishlist after adding a movie with collection list
     return redirect(url_for(f'{location}_index'))
@@ -86,7 +92,10 @@ def cart_index():
 @app.route('/cart/delete/<movie_id>')
 def cart_delete(movie_id):
     """Delete specified item from cart"""
-    cart_list.delete_one({'_id': ObjectId(movie_id)})
+    if cart_list.find_one({'_id': ObjectId(movie_id)})['quantity'] > 1:
+        cart_list.update_one({'_id': ObjectId(movie_id)}, {'$inc': {'quantity': -int(1)}})
+    else:
+        cart_list.delete_one({'_id': ObjectId(movie_id)})
 
     return redirect(url_for('cart_index'))
 

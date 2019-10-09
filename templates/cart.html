@@ -14,8 +14,9 @@
                 <img id="poster" class="img-in" src="https://image.tmdb.org/t/p/w400{{ movie['poster_path'] }}" alt="">
                 
                 <div class="col">
-                    <!-- Movie Title -->
-                    <h2>{% include '/partials/movie_title.html'%}</h2>
+                    <!-- Movie Title and-->
+                        <h2>{% include '/partials/movie_title.html'%}</h2>
+                        <h2 class="text-right mr-auto"> Quantity: {{movie.quantity}}</h2>
                     <!-- Movie Description -->
                     <br>
                     <h4 class="text-lg-left"> {{movie['overview']}} </h4>
