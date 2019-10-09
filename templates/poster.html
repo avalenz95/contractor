@@ -5,7 +5,7 @@
         <h3>{% include '/partials/movie_title.html'%}</h3>
     </div>
     <img  class="img-fluid img-in" src="https://image.tmdb.org/t/p/w300{{ movie['poster_path'] }}" alt="">
-    <div>
+    <div class="container-fluid">
     <!-- Pass in object id to url-->
     <form action='/movie/{{movie._id}}' method='POST'>
         <button type ='submit' class="btn btn-primary btn-md">View Details</button>

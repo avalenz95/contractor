@@ -19,11 +19,6 @@
 
         <div>
 
-        <!-- Add movie to wishlist -->
-        <form action='/wishlist/add/{{movie._id}}'>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Add to Wishlist</button>
-        </form>
-
             <br>
         <!-- Add movie to cart-->
         <form action='/cart/add/{{movie._id}}'>
@@ -37,3 +32,8 @@
       
 
 {% endblock %}
+
+        <!-- Add movie to wishlist temporarly remove wishlist functionality 
+        <form action='/wishlist/add/{{movie._id}}'>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Add to Wishlist</button>
+        </form> -->

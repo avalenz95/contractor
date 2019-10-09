@@ -1,12 +1,9 @@
 import os
-from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-
-load_dotenv()
 
 #Client
 client = MongoClient()
@@ -21,7 +18,7 @@ current_index.drop()
 #cart_list.drop()
 
 app = Flask(__name__)
-TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+TMDB_API_KEY = 'c19ff401506998a56c82406befe55455'
 
 #Show initial search page with attributions and big search bar
 @app.route('/', methods=['GET', 'POST'])
@@ -46,12 +43,12 @@ def index():
 
         current_index.drop()
 
+        #parse JSON
         #Thanks to Mr. Ben Lafferty and Zurich Okoren for helping me understand lambda and filter better
         filtered_list = list(filter(lambda x: (x.get("title") or x.get("original_title" or x.get("original_name"))) and x.get("poster_path"), movies))
 
         #Add current index of movies to a collection
         current_index.insert_many(filtered_list)
-
 
     #Display all movies in current_index
     return render_template('index.html', movies = list(current_index.find()))
@@ -84,8 +81,16 @@ def add_to(location, movie_id):
 @app.route('/cart')
 def cart_index():
     """Show Cart with all cart contents""" 
-  
     return render_template('cart.html', cart=list(cart_list.find()))
+
+@app.route('/cart/delete/<movie_id>')
+def cart_delete(movie_id):
+    """Delete specified item from cart"""
+    cart_list.delete_one({'_id': ObjectId(movie_id)})
+
+    return redirect(url_for('cart_index'))
+
+
 
 #@app.route('/wishlist')
 #def wishlist_index(movies):
