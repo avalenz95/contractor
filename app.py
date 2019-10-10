@@ -10,7 +10,7 @@ client = MongoClient(host=host)
 #Client
 client = MongoClient(host=f'{host}?retryWrites=false')
 #Database associated with Client
-db = client.MovieDB
+db = client.get_default_database()
 #Collections associated with Database
 cart_list = db.cart_list
 wish_list = db.wish_list
