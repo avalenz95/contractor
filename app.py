@@ -5,8 +5,10 @@ import json
 from pymongo import MongoClient, ReturnDocument, errors
 from bson.objectid import ObjectId
 
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
+client = MongoClient(host=host)
 #Client
-client = MongoClient()
+client = MongoClient(host=f'{host}?retryWrites=false')
 #Database associated with Client
 db = client.MovieDB
 #Collections associated with Database
@@ -100,6 +102,9 @@ def cart_delete(movie_id):
         cart_list.delete_one({'_id': ObjectId(movie_id)})
 
     return redirect(url_for('cart_index'))
+
+if __name__ == '__main__':
+  app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
 
 
 
