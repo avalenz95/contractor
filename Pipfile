@@ -12,6 +12,7 @@ requests = "*"
 jinja2 = "*"
 pymongo = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

@@ -8,6 +8,14 @@
 .cart-text {
     font-size: 72px;
 }
+
+.c-text h2:first-of-type {
+    float: left;
+}
+
+.c-text h2:last-of-type {
+    float: right;
+}
 /* increase size of search bar */
 .form-control {
     height: 50px;

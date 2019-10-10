@@ -92,8 +92,10 @@ def cart_index():
 @app.route('/cart/delete/<movie_id>')
 def cart_delete(movie_id):
     """Delete specified item from cart"""
+    #Cart already has contents just update quantity
     if cart_list.find_one({'_id': ObjectId(movie_id)})['quantity'] > 1:
         cart_list.update_one({'_id': ObjectId(movie_id)}, {'$inc': {'quantity': -int(1)}})
+    #Remove from cart
     else:
         cart_list.delete_one({'_id': ObjectId(movie_id)})
 
