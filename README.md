@@ -1,5 +1,5 @@
 # BEW 1.1 Contractor Project
-![Contractor Demo](contractor.gif)
+![Contractor Project](contractor.png)
 
 ## About
 This was the final project in my Backend Web 1.1 Course at MakeSchool. The goal was to utilize our knowledge of routes and templating to create an interactive storefront that others could use.
