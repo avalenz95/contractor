@@ -2,7 +2,7 @@
 ![Contractor Demo](contractor.gif)
 
 ## About
-This was the final project in my Backend Web 1.1 Course at MakeSchool
+This was the final project in my Backend Web 1.1 Course at MakeSchool. The goal was to utilize our knowledge of routes and templating to create an interactive storefront that others could use.
 
 ## Viewing the project
 This app has been hosted on Heroku. Making it easy to see and interact with.
