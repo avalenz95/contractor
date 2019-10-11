@@ -2,7 +2,7 @@
 ![Contractor Project](contractor.png)
 
 ## About
-This was the final project in my Backend Web 1.1 Course at MakeSchool. The goal was to utilize our knowledge of routes and templating to create an interactive storefront that others could use.
+This was the final project in my Backend Web 1.1 Course at MakeSchool. The goal was to utilize our knowledge of routes and templating to create an interactive storefront that others could use. I decided to connect my project to an API that allows the user to search for all types of movies and return the most relevant ones. 
 
 ## Viewing the project
 This app has been hosted on Heroku. Making it easy to see and interact with.
